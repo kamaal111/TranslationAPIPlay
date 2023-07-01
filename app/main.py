@@ -1,17 +1,13 @@
-from typing import TYPE_CHECKING, Annotated
+from fastapi import FastAPI
 
-from fastapi import Depends, FastAPI
-
-from app.dependencies.translate_client import get_translate_api
-
-if TYPE_CHECKING:
-    from google.cloud.translate_v2 import Client as TranslateClient
+from app.translations.router import router as translations_router
 
 app = FastAPI()
 
 
-@app.get("/")
-def read_root(
-    translate_client: Annotated["TranslateClient", Depends(get_translate_api)]
-):
-    return translate_client.get_languages()
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
+
+app.include_router(translations_router)
