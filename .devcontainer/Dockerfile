@@ -1,6 +1,6 @@
 FROM python:3.11-slim-bookworm
 
-RUN apt update && apt install -y zsh curl git vim \
+RUN apt update && apt install -y zsh curl git vim httpie \
     # gcloud CLI
     apt-transport-https ca-certificates gnupg
 

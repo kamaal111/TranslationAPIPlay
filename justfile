@@ -8,7 +8,7 @@ run-dev:
 
     just install-python-modules $DEVCONTAINER_VIRTUAL_ENVIRONMENT
     . $DEVCONTAINER_VIRTUAL_ENVIRONMENT/bin/activate
-    uvicorn main:app --reload
+    uvicorn app.main:app --reload
 
 initialize-gcloud:
     #!/bin/zsh

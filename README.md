@@ -20,6 +20,12 @@ just initialize-gcloud
 just create-api-key-dev <GCP PROJECT_ID> <UNIQUENESS SUFFIX>
 ```
 
+4. Add the API key to a `.env` file
+
+```env
+TRANSLATE_API_KEY=<CREATED API KEY>
+```
+
 ## Running the app
 
 ### Using Visual Studio Code Dev containers
