@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Annotated, List
+from typing import TYPE_CHECKING, Annotated
 
 from fastapi import APIRouter, Depends
 
@@ -36,7 +36,7 @@ def translate(
     )
 
 
-@router.get("/supported-locales", response_model=List[SupportedLocalesResponse])
+@router.get("/supported-locales", response_model=list[SupportedLocalesResponse])
 def supported_locales(
     target: str,
     translation_service: Annotated[

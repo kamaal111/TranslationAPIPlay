@@ -1,4 +1,4 @@
-from typing import List, TypedDict
+from typing import TypedDict
 
 
 class TranslateClientSupportedLocale(TypedDict):
@@ -6,7 +6,7 @@ class TranslateClientSupportedLocale(TypedDict):
     name: str
 
 
-TranslateClientSupportedLocalesResponse = List[TranslateClientSupportedLocale]
+TranslateClientSupportedLocalesResponse = list[TranslateClientSupportedLocale]
 
 
 class TranslateClientTranslateResponse(TypedDict):

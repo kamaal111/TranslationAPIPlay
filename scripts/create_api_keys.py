@@ -1,6 +1,5 @@
 import sys
 from getopt import getopt
-from typing import Dict, List
 
 from google.cloud import api_keys_v2
 from google.cloud.api_keys_v2 import Key
@@ -39,13 +38,13 @@ def create_api_key(project_id: str, suffix: str) -> Key | None:
     return response
 
 
-def validate_opts(opts: Dict[str, str], required_opts: List[str]):
+def validate_opts(opts: dict[str, str], required_opts: list[str]):
     for required_opt in required_opts:
         if not opts.get(required_opt):
             raise Exception(f"{required_opt} is required")
 
 
-def parse_opts(shortopts: List[str] = [], longopts: List[str] = []) -> Dict[str, str]:
+def parse_opts(shortopts: list[str] = [], longopts: list[str] = []) -> dict[str, str]:
     argv = sys.argv[1:]
     given_opts = shortopts + longopts
     opts, _ = getopt(argv, ":".join(shortopts) + ":", map_longopts(longopts=longopts))
@@ -65,8 +64,8 @@ def parse_opts(shortopts: List[str] = [], longopts: List[str] = []) -> Dict[str,
     return opts_dict
 
 
-def map_longopts(longopts: List[str]) -> List[str]:
-    opts: List[str] = []
+def map_longopts(longopts: list[str]) -> list[str]:
+    opts: list[str] = []
     for longopt in longopts:
         opts.append(f"{longopt}=")
 
