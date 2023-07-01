@@ -9,7 +9,11 @@ from returns.pointfree import bind
 if TYPE_CHECKING:
     from returns.result import Result
     from google.cloud.translate_v2 import Client as TranslateClient
-    from app.translations.types import TranslateClientTranslateResponse
+    from google.api_core.exceptions import ClientError
+    from app.translations.types import (
+        TranslateClientTranslateResponse,
+        TranslateClientSupportedLocalesResponse,
+    )
 
 
 @dataclass
@@ -25,9 +29,14 @@ class TranslationService:
     def __init__(self, client: "TranslateClient") -> None:
         self.client = client
 
+    def get_supported_locales(
+        self, target_locale: str
+    ) -> "Result[TranslateClientSupportedLocalesResponse, ClientError]":
+        return flow(target_locale, self.__get_supported_locales)
+
     def translate(
         self, text: str, source_locale: str, target_locale: str
-    ) -> "Result[str, Exception]":
+    ) -> "Result[str, ClientError | KeyError]":
         return flow(
             TranslatePayload(
                 text=text,
@@ -37,6 +46,10 @@ class TranslationService:
             self.__translate,
             bind(self.__get_translated_text_from_translate_client_translate_response),
         )
+
+    @safe
+    def __get_supported_locales(self, target_locale: str):
+        return self.client.get_languages(target_language=target_locale)
 
     @safe
     def __translate(
