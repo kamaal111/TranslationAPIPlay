@@ -11,13 +11,14 @@
 		"vscode": {
 			"settings": {
 				"terminal.integrated.defaultProfile.linux": "zsh",
-                "python.defaultInterpreterPath": "/workspaces/TranslationAPIPlay/.devcontainer/.venv/bin/python"
+				"python.defaultInterpreterPath": "/workspaces/TranslationAPIPlay/.devcontainer/.venv/bin/python"
 			},
 			"extensions": [
 				"skellock.just",
 				"streetsidesoftware.code-spell-checker",
 				"ms-python.python",
-				"bungcip.better-toml"
+				"bungcip.better-toml",
+				"charliermarsh.ruff"
 			]
 		}
 	},

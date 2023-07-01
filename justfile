@@ -42,6 +42,8 @@ setup-python-environment virtual-environment:
 
     just install-python-modules "{{ virtual-environment }}"
 
+    pre-commit install
+
 [private]
 setup-zsh-environment:
     #!/bin/zsh
