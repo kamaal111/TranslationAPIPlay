@@ -4,13 +4,27 @@ DEVCONTAINER := ".devcontainer"
 DEVCONTAINER_VIRTUAL_ENVIRONMENT :=  DEVCONTAINER / ".venv"
 
 run-dev:
+    #!/bin/zsh
+
     just install-python-modules $DEVCONTAINER_VIRTUAL_ENVIRONMENT
-
     . $DEVCONTAINER_VIRTUAL_ENVIRONMENT/bin/activate
-
     uvicorn main:app --reload
 
+initialize-gcloud:
+    #!/bin/zsh
+
+    gcloud init
+    gcloud auth application-default login
+
+create-api-key-dev project-id suffix:
+    #!/bin/zsh
+
+    . $DEVCONTAINER_VIRTUAL_ENVIRONMENT/bin/activate
+    python scripts/create_api_keys.py --project_id {{ project-id }} --suffix {{ suffix }}
+
 setup-dev-container: copy-to-container setup-zsh-environment
+    #!/bin/zsh
+
     just setup-python-environment $DEVCONTAINER_VIRTUAL_ENVIRONMENT
 
 initialize-dev-container: copy-git-config-from-outside-container set-environment
@@ -22,7 +36,6 @@ install-python-modules virtual-environment:
     VIRTUAL_ENVIRONMENT="{{ virtual-environment }}"
 
     . $VIRTUAL_ENVIRONMENT/bin/activate
-
     poetry install
 
 [private]
@@ -39,9 +52,7 @@ setup-python-environment virtual-environment:
 
     pip install poetry
     poetry install
-
     just install-python-modules "{{ virtual-environment }}"
-
     pre-commit install
 
 [private]

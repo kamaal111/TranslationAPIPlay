@@ -301,6 +301,22 @@ pyopenssl = ["pyopenssl (>=20.0.0)"]
 reauth = ["pyu2f (>=0.1.5)"]
 
 [[package]]
+name = "google-cloud-api-keys"
+version = "0.5.2"
+description = "Google Cloud Api Keys API client library"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "google-cloud-api-keys-0.5.2.tar.gz", hash = "sha256:9fcfc7d8f3b2d7b5e9fe9ae3af734852e8586c48ae5d9cf2253875c077f9b511"},
+    {file = "google_cloud_api_keys-0.5.2-py2.py3-none-any.whl", hash = "sha256:2e7045242dde28e82c4619ca9e5364aa1f85c6cf01c2cd37de81a13c9a6cebf5"},
+]
+
+[package.dependencies]
+google-api-core = {version = ">=1.34.0,<2.0.dev0 || >=2.11.dev0,<3.0.0dev", extras = ["grpc"]}
+proto-plus = {version = ">=1.22.2,<2.0.0dev", markers = "python_version >= \"3.11\""}
+protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+
+[[package]]
 name = "google-cloud-core"
 version = "1.7.3"
 description = "Google Cloud API client core library"
@@ -1132,4 +1148,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "0b896e4ed078a1c56a4d6077169b8c8a28d28d4532b9b41fc3e6141f2c801af6"
+content-hash = "96cef342b8cd1b93cf1c9391eaa856cee8ebd7b356cf949bd50337ea4a6f4316"

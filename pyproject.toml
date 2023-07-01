@@ -16,6 +16,7 @@ google-cloud-translate = "^3.11.1"
 black = "^23.3.0"
 ruff = "^0.0.275"
 pre-commit = "^3.3.3"
+google-cloud-api-keys = "^0.5.2"
 
 [build-system]
 requires = ["poetry-core"]
