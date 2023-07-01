@@ -821,6 +821,23 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "returns"
+version = "0.21.0"
+description = "Make your functions return something meaningful, typed, and safe!"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "returns-0.21.0-py3-none-any.whl", hash = "sha256:5e90e14e76fc88d029c3c95a420077eab7fec25b3dbee48e6a7b5e06d6c39b97"},
+    {file = "returns-0.21.0.tar.gz", hash = "sha256:56e743fb6f80bd83f8a0d31cb2d08b1e30f4e70c9ee9a5d89e400c5217166ef5"},
+]
+
+[package.dependencies]
+typing-extensions = ">=4.0,<5.0"
+
+[package.extras]
+compatible-mypy = ["mypy (>=1.4.0,<2.0.0)"]
+
+[[package]]
 name = "rsa"
 version = "4.9"
 description = "Pure-Python RSA implementation"
@@ -1148,4 +1165,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "96cef342b8cd1b93cf1c9391eaa856cee8ebd7b356cf949bd50337ea4a6f4316"
+content-hash = "b130440bbe79789a067c9c764dd3b13a01126343b55b57eee472442a7b9607fb"

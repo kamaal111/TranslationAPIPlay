@@ -1,44 +1,36 @@
-from typing import TYPE_CHECKING, Annotated, TypedDict
+from http.client import INTERNAL_SERVER_ERROR
+from typing import TYPE_CHECKING, Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from returns.result import Success
 
-from app.translations.dependencies import get_translate_api
+from app.translations.dependencies import get_translation_service
+from app.translations.models import TranslationPayload, TranslationResponse
+
 
 if TYPE_CHECKING:
-    from google.cloud.translate_v2 import Client as TranslateClient
+    from app.translations.services import TranslationService
 
 
 router = APIRouter(tags=["translations"], prefix="/translations")
 
 
-class TranslationPayload(BaseModel):
-    text: str
-    source_locale: str
-    target_locale: str
-
-
-class TranslationResponse(BaseModel):
-    translated_text: str
-
-
-class TranslateClientTranslateResponse(TypedDict):
-    translatedText: str
-    input: str
-
-
 @router.post("")
 def translate(
     payload: TranslationPayload,
-    translation_client: Annotated["TranslateClient", Depends(get_translate_api)],
+    translation_service: Annotated[
+        "TranslationService", Depends(get_translation_service)
+    ],
 ) -> TranslationResponse:
-    try:
-        translation: TranslateClientTranslateResponse = translation_client.translate(
-            values=payload.text,
-            target_language=payload.target_locale,
-            source_language=payload.source_locale,
-        )
-    except Exception:
-        raise HTTPException(status_code=500, detail="Something went wrong")
-
-    return TranslationResponse(translated_text=translation["translatedText"])
+    translate_result = translation_service.translate(
+        text=payload.text,
+        source_locale=payload.source_locale,
+        target_locale=payload.target_locale,
+    )
+    match translate_result:
+        case Success(translated_text):
+            return TranslationResponse(translated_text=translated_text)
+        case _:
+            raise HTTPException(
+                status_code=INTERNAL_SERVER_ERROR, detail="Something went wrong"
+            )
